@@ -45,8 +45,8 @@ class BaseInteractionsTest(ABC):
         assert response.id is not None or response.status is not None
 
         # Check outputs per OpenAPI spec
-        if response.outputs:
-            assert len(response.outputs) > 0
+        if response.steps:
+            assert len(response.steps) > 0
 
         # Check usage per OpenAPI spec
         if response.usage:
@@ -79,8 +79,8 @@ class BaseInteractionsTest(ABC):
         )
         assert response is not None
         # Verify the response reflects the system instruction
-        if response.outputs:
-            assert len(response.outputs) > 0
+        if response.steps:
+            assert len(response.steps) > 0
 
     def test_create_streaming(self):
         """Test creating a streaming interaction."""

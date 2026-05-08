@@ -70,7 +70,6 @@ class TestRequestCompliance:
             "background",
             "response_modalities",
             "response_format",
-            "response_mime_type",
             "previous_interaction_id",
         ]
 
@@ -164,7 +163,7 @@ class TestResponseCompliance:
             "created",
             "updated",
             "role",
-            "outputs",
+            "steps",
             "usage",
         ]
 

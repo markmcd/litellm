@@ -65,7 +65,6 @@ class GoogleAIStudioInteractionsConfig(BaseInteractionsAPIConfig):
             "background",
             "response_modalities",
             "response_format",
-            "response_mime_type",
             "previous_interaction_id",
         ]
 
@@ -143,7 +142,6 @@ class GoogleAIStudioInteractionsConfig(BaseInteractionsAPIConfig):
             "background",
             "response_modalities",
             "response_format",
-            "response_mime_type",
             "previous_interaction_id",
         ]
         for key in optional_keys:

@@ -17,7 +17,6 @@ INTERACTIONS_API_OPTIONAL_PARAMS = {
     "background",
     "response_modalities",
     "response_format",
-    "response_mime_type",
     "previous_interaction_id",
     "agent_config",
 }

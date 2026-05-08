@@ -83,7 +83,7 @@ async def acreate(
     # Response format
     response_modalities: Optional[List[str]] = None,
     response_format: Optional[Dict[str, Any]] = None,
-    response_mime_type: Optional[str] = None,
+    
     # Continuation
     previous_interaction_id: Optional[str] = None,
     # Extra params
@@ -111,7 +111,6 @@ async def acreate(
         background: Whether to run in background
         response_modalities: Requested response modalities (TEXT, IMAGE, AUDIO)
         response_format: JSON schema for response format
-        response_mime_type: MIME type of the response
         previous_interaction_id: ID of previous interaction for continuation
         extra_headers: Additional headers
         extra_body: Additional body parameters
@@ -146,7 +145,7 @@ async def acreate(
             background=background,
             response_modalities=response_modalities,
             response_format=response_format,
-            response_mime_type=response_mime_type,
+            
             previous_interaction_id=previous_interaction_id,
             extra_headers=extra_headers,
             extra_body=extra_body,
@@ -197,7 +196,7 @@ def create(
     # Response format
     response_modalities: Optional[List[str]] = None,
     response_format: Optional[Dict[str, Any]] = None,
-    response_mime_type: Optional[str] = None,
+    
     # Continuation
     previous_interaction_id: Optional[str] = None,
     # Extra params
@@ -233,7 +232,6 @@ def create(
         background: Whether to run in background
         response_modalities: Requested response modalities (TEXT, IMAGE, AUDIO)
         response_format: JSON schema for response format
-        response_mime_type: MIME type of the response
         previous_interaction_id: ID of previous interaction for continuation
         extra_headers: Additional headers
         extra_body: Additional body parameters

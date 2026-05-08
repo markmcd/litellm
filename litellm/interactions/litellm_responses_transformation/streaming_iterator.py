@@ -144,10 +144,15 @@ class LiteLLMResponsesInteractionsStreamingIterator:
                 object="interaction",
                 status="completed",
                 model=self.model,
-                outputs=[
+                steps=[
                     {
-                        "type": "text",
-                        "text": self.collected_text,
+                        "type": "model_output",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": self.collected_text,
+                            }
+                        ],
                     }
                 ],
             )

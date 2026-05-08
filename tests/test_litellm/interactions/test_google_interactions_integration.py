@@ -37,7 +37,7 @@ class TestGoogleInteractionsCreate:
     def test_create_simple_string_input(self, api_key):
         """Test creating an interaction with a simple string input."""
         response = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="Hello, what is 2 + 2?",
             api_key=api_key,
         )
@@ -46,9 +46,9 @@ class TestGoogleInteractionsCreate:
         assert response.id is not None or response.status is not None
 
         # Check outputs per OpenAPI spec
-        if response.outputs:
-            assert len(response.outputs) > 0
-            print(f"Response outputs: {response.outputs}")
+        if response.steps:
+            assert len(response.steps) > 0
+            print(f"Response outputs: {response.steps}")
 
         # Check usage per OpenAPI spec
         if response.usage:
@@ -57,7 +57,7 @@ class TestGoogleInteractionsCreate:
     def test_create_with_content_list(self, api_key):
         """Test creating an interaction with a structured content list (Turn format)."""
         response = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input=[
                 {
                     "role": "user",
@@ -75,7 +75,7 @@ class TestGoogleInteractionsCreate:
     def test_create_with_system_instruction(self, api_key):
         """Test creating an interaction with system_instruction (per OpenAPI spec)."""
         response = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="What are you?",
             system_instruction="You are a helpful pirate assistant. Always respond like a pirate.",
             api_key=api_key,
@@ -87,7 +87,7 @@ class TestGoogleInteractionsCreate:
     def test_create_with_tools(self, api_key):
         """Test creating an interaction with tools (per OpenAPI spec)."""
         response = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="What's the weather in Boston?",
             tools=[
                 {
@@ -112,13 +112,13 @@ class TestGoogleInteractionsCreate:
         assert response is not None
         # Check if status is requires_action (function call)
         print(f"Response status: {response.status}")
-        print(f"Response outputs: {response.outputs}")
+        print(f"Response outputs: {response.steps}")
 
     @pytest.mark.asyncio
     async def test_acreate_simple(self, api_key):
         """Test async interaction creation."""
         response = await interactions.acreate(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="What is the speed of light?",
             api_key=api_key,
         )
@@ -133,7 +133,7 @@ class TestGoogleInteractionsStreaming:
     def test_create_streaming(self, api_key):
         """Test creating a streaming interaction."""
         response_stream = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="Count from 1 to 5 slowly.",
             stream=True,
             api_key=api_key,
@@ -152,7 +152,7 @@ class TestGoogleInteractionsStreaming:
     async def test_acreate_streaming(self, api_key):
         """Test async streaming interaction."""
         response_stream = await interactions.acreate(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="Count from 1 to 3.",
             stream=True,
             api_key=api_key,
@@ -174,7 +174,7 @@ class TestGoogleInteractionsMultiTurn:
     def test_multi_turn_conversation(self, api_key):
         """Test a multi-turn conversation per OpenAPI spec (Turn[] format)."""
         response = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input=[
                 {
                     "role": "user",
@@ -224,7 +224,7 @@ class TestGoogleInteractionsGetDelete:
         """Test getting an interaction by ID."""
         # First create an interaction
         create_response = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="Hello",
             api_key=api_key,
         )
@@ -245,7 +245,7 @@ class TestGoogleInteractionsGetDelete:
         """Test deleting an interaction by ID."""
         # First create an interaction
         create_response = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="Hello",
             api_key=api_key,
         )
@@ -287,7 +287,7 @@ class TestGoogleInteractionsResponseStructure:
     def test_response_has_expected_fields(self, api_key):
         """Test that the response has fields per OpenAPI spec."""
         response = interactions.create(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="Hello",
             api_key=api_key,
         )
@@ -319,7 +319,7 @@ if __name__ == "__main__":
 
     print("\n1. Testing basic interaction...")
     response = interactions.create(
-        model="gemini/gemini-2.5-flash",
+        model="gemini/gemini-3-flash-preview",
         input="What is 2 + 2?",
         api_key=api_key,
     )
@@ -327,7 +327,7 @@ if __name__ == "__main__":
 
     print("\n2. Testing streaming interaction...")
     stream = interactions.create(
-        model="gemini/gemini-2.5-flash",
+        model="gemini/gemini-3-flash-preview",
         input="Count to 3.",
         stream=True,
         api_key=api_key,
@@ -340,7 +340,7 @@ if __name__ == "__main__":
 
     async def test_async():
         response = await interactions.acreate(
-            model="gemini/gemini-2.5-flash",
+            model="gemini/gemini-3-flash-preview",
             input="Say hello!",
             api_key=api_key,
         )

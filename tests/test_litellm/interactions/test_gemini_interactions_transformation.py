@@ -34,7 +34,7 @@ class TestValidateEnvironment:
 
         headers = config.validate_environment(
             headers={},
-            model="gemini-2.5-flash",
+            model="gemini-3-flash-preview",
             litellm_params=litellm_params,
         )
 
@@ -47,7 +47,7 @@ class TestValidateEnvironment:
         with patch(_PATCH_GET_API_KEY, return_value=None):
             headers = config.validate_environment(
                 headers={},
-                model="gemini-2.5-flash",
+                model="gemini-3-flash-preview",
                 litellm_params=litellm_params,
             )
 
@@ -57,7 +57,7 @@ class TestValidateEnvironment:
     def test_no_litellm_params_skips_header(self, config):
         headers = config.validate_environment(
             headers={},
-            model="gemini-2.5-flash",
+            model="gemini-3-flash-preview",
             litellm_params=None,
         )
 
@@ -69,7 +69,7 @@ class TestValidateEnvironment:
 
         headers = config.validate_environment(
             headers={"X-Custom": "value"},
-            model="gemini-2.5-flash",
+            model="gemini-3-flash-preview",
             litellm_params=litellm_params,
         )
 
@@ -82,7 +82,7 @@ class TestGetCompleteUrl:
         with patch(_PATCH_GET_API_KEY, return_value="secret-key"):
             url = config.get_complete_url(
                 api_base=None,
-                model="gemini-2.5-flash",
+                model="gemini-3-flash-preview",
                 litellm_params={"api_key": "secret-key"},
             )
 
@@ -94,7 +94,7 @@ class TestGetCompleteUrl:
         with patch(_PATCH_GET_API_KEY, return_value="secret-key"):
             url = config.get_complete_url(
                 api_base=None,
-                model="gemini-2.5-flash",
+                model="gemini-3-flash-preview",
                 litellm_params={"api_key": "secret-key"},
                 stream=True,
             )
@@ -108,7 +108,7 @@ class TestGetCompleteUrl:
             with pytest.raises(ValueError, match="Google API key is required"):
                 config.get_complete_url(
                     api_base=None,
-                    model="gemini-2.5-flash",
+                    model="gemini-3-flash-preview",
                     litellm_params={"api_key": None},
                 )
 

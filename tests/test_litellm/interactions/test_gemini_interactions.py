@@ -16,7 +16,7 @@ class TestGeminiInteractions(BaseInteractionsTest):
 
     def get_model(self) -> str:
         """Return the Gemini model string."""
-        return "gemini/gemini-2.5-flash"
+        return "gemini/gemini-3-flash-preview"
 
     def get_api_key(self) -> str:
         """Return the Gemini API key from environment."""

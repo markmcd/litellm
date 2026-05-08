@@ -226,8 +226,8 @@ class LiteLLMResponsesInteractionsConfig:
         - Map status
         - Extract usage
         """
-        # Extract text from outputs
-        outputs = []
+        # Extract text from output to create content for the step
+        content_items_list = []
         if hasattr(responses_response, "output") and responses_response.output:
             for output_item in responses_response.output:
                 # Use getattr with None default to safely access content
@@ -238,7 +238,7 @@ class LiteLLMResponsesInteractionsConfig:
                         # Check if content_item has text attribute
                         text = getattr(content_item, "text", None)
                         if text is not None:
-                            outputs.append(
+                            content_items_list.append(
                                 {
                                     "type": "text",
                                     "text": text,
@@ -248,7 +248,14 @@ class LiteLLMResponsesInteractionsConfig:
                             isinstance(content_item, dict)
                             and content_item.get("type") == "text"
                         ):
-                            outputs.append(content_item)
+                            content_items_list.append(content_item)
+                            
+        steps = []
+        if content_items_list:
+            steps.append({
+                "type": "model_output",
+                "content": content_items_list
+            })
 
         # Convert created_at to ISO string
         created_at = getattr(responses_response, "created_at", None)
@@ -275,7 +282,7 @@ class LiteLLMResponsesInteractionsConfig:
             "id": getattr(responses_response, "id", ""),
             "object": "interaction",
             "status": interactions_status,
-            "outputs": outputs,
+            "steps": steps,
             "model": model or getattr(responses_response, "model", ""),
             "created": created,
         }
